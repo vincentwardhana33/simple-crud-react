@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
 import Sidebar from '../src/Component/Sidebar';
 import Navbar from '../src/Component/Navbar';
