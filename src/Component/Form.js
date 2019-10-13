@@ -37,7 +37,7 @@ class Form extends Component {
 
   render() {
 
-    if (this.state.success_flag == 1)
+    if (this.state.success_flag === 1)
     {
          var success_flag = <div className="form-group">
             <br></br>
