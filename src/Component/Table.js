@@ -15,7 +15,7 @@ class Table extends Component {
         axios.get('http://localhost:3001/select')
         .then((response) =>{
             this.setState({
-                data: response.data
+                data: response.data.return
             });
         })
     };
@@ -28,7 +28,7 @@ class Table extends Component {
         .then(function(response){
             console.log(response);
             self.setState({
-                data: response.data
+                data: response.data.return
             });
         });
     }
@@ -36,17 +36,13 @@ class Table extends Component {
   render() {
 
     const list_data = this.state.data.map((item, index)=> {
-        var id = item.id;
-        var name = item.name;
-        var email = item.email;
-        var phonenumber = item.phonenumber;
-
         return <tr>
             <td>{index+1}</td>
-            <td>{name}</td>
-            <td>{email}</td>
-            <td>{phonenumber}</td>
-            <td><button className='btn btn-danger' onClick={() => this.delete(id)}>Delete</button></td>
+            <td>{item.name}</td>
+            <td>{item.email}</td>
+            <td>{item.phonenumber}</td>
+            <td><img src={`http://localhost:3001/images/${item.profile_picture}`} width="75" height="100" /></td>
+            <td><button className='btn btn-danger' onClick={() => this.delete(item.id)}>Delete</button></td>
         </tr>
     })
 
@@ -61,6 +57,7 @@ class Table extends Component {
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone Number</th>
+                        <th>Profile Picture</th>
                         <th></th>
                     </tr>
                     {list_data}
