@@ -18,6 +18,10 @@ $ git clone https://github.com/vincentwardhana33/simple-crud-react.git
 
 **Setup dependencies**
 ```sh 
+$ npm install -g create-react-app
+```
+
+```sh 
 $ npm install
 ```
 
