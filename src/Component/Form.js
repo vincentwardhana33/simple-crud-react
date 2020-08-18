@@ -3,42 +3,34 @@ import axios from 'axios';
 
 class Form extends Component {
 
-    constructor()
-    {
+    constructor(){
         super();
 
-        this.state =
-        {
+        this.state ={
             success_flag: 0
         };
     }
 
-    post(obj)
-    {
+    post(obj){
         var self = this;
-        axios.post('http://localhost:3001/insert',
-        {
+        axios.post('http://localhost:3001/insert', {
             name: obj.name.value,
             email: obj.email.value,
             phonenumber: obj.phonenumber.value
         })
-        .then(function(response)
-        {
+        .then(function(response){
             console.log(response.data);
 
             document.getElementById("create-course-form").reset();
 
-            self.setState(
-            {
+            self.setState({
                 success_flag: 1
             });
         });
     }
 
   render() {
-
-    if (this.state.success_flag === 1)
-    {
+    if (this.state.success_flag === 1){
          var success_flag = <div className="form-group">
             <br></br>
             <div class="alert alert-success" role="alert">
@@ -51,9 +43,7 @@ class Form extends Component {
 
     return (
         <div className="col-lg-12">
-        
             {success_flag}
-            
             <form id="create-course-form" action="#" className="form-horizontal">
                 <div className="form-group">
                     <label htmlFor="control-demo-1" className="col-sm-3">Name</label>

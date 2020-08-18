@@ -3,42 +3,31 @@ import axios from 'axios';
 
 class Table extends Component {
 
-    constructor()
-    {
+    constructor(){
         super();
 
-        this.state =
-        {
+        this.state ={
             data: []
         };
     }
     
-    componentWillMount()
-    {
+    componentWillMount(){
         axios.get('http://localhost:3001/select')
-        .then((response) =>
-        {
-            // console.log(response.data);
-
-            this.setState(
-            {
+        .then((response) =>{
+            this.setState({
                 data: response.data
             });
         })
     };
 
-    delete(id)
-    {
+    delete(id){
         var self = this;
-        axios.post('http://localhost:3001/delete',
-        {
+        axios.post('http://localhost:3001/delete', {
             id: id
         })
-        .then(function(response)
-        {
+        .then(function(response){
             console.log(response);
-            self.setState(
-            {
+            self.setState({
                 data: response.data
             });
         });
@@ -46,8 +35,7 @@ class Table extends Component {
 
   render() {
 
-    const list_data = this.state.data.map((item, index)=>
-    {
+    const list_data = this.state.data.map((item, index)=> {
         var id = item.id;
         var name = item.name;
         var email = item.email;
