@@ -17,6 +17,7 @@ class Sidebar extends Component {
                 <ul className="nav flex-column">
                 <li className="nav-item"><Link to="/form" className="nav-link"><i className="fa fa-edit" />forms</Link></li>
                 <li className="nav-item"><Link to="/" className="nav-link"><i className="fa fa-table" />tables</Link></li>
+                <li className="nav-item"><Link to="/cart" className="nav-link"><i className="fa fa-table" />cart</Link></li>
                 </ul>
             </div>
         </div>

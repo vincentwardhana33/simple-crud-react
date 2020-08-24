@@ -5,6 +5,7 @@ import Sidebar from '../src/Component/Sidebar';
 import Navbar from '../src/Component/Navbar';
 import Form from '../src/Component/Form';
 import Table from '../src/Component/Table';
+import Cart from '../src/Component/Cart'
 
 class App extends Component {
   render() {
@@ -15,6 +16,7 @@ class App extends Component {
               <Navbar />
               <Route exact path="/" component={Table} />
               <Route path="/form" component={Form} />
+              <Route path="/cart" component={Cart} />
             </div>
         </section>
     );

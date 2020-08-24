@@ -23,8 +23,7 @@ class Form extends Component {
      
         formData.append("filename", this.state.selectedFile);
         formData.append('name', refs.name.value);
-        formData.append('email', refs.email.value);
-        formData.append('phonenumber', refs.phonenumber.value);
+        formData.append('price', refs.price.value);
 
         console.log(formData);
 
@@ -76,7 +75,7 @@ class Form extends Component {
     return (
         <div className="col-lg-12">
             {success_flag}
-            <form id="create-course-form" action="#" className="form-horizontal">
+            <form id="create-course-form" action="#" className="form-horizontal" style={{paddingTop: 25}}>
                 <div className="form-group">
                     <label htmlFor="control-demo-1" className="col-sm-3">Name</label>
                     <div className="col-sm-12">
@@ -84,19 +83,13 @@ class Form extends Component {
                     </div>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="control-demo-2" className="col-sm-3">Email</label>
+                    <label htmlFor="control-demo-2" className="col-sm-3">Price</label>
                     <div className="col-sm-12">
-                        <input type="email" id="control-demo-2" className="form-control" placeholder="Email" ref="email" />
+                        <input type="number" id="control-demo-2" className="form-control" placeholder="Price" ref="price" />
                     </div>
                 </div>
                 <div className="form-group">
-                    <label htmlFor="control-demo-2" className="col-sm-3">Phone Number</label>
-                    <div className="col-sm-12">
-                        <input type="number" id="control-demo-2" className="form-control" placeholder="Phone Number" ref="phonenumber" />
-                    </div>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="control-demo-2" className="col-sm-3">Profile Picture</label>
+                    <label htmlFor="control-demo-2" className="col-sm-3">Image</label>
                     <div className="col-sm-12">
                         <input type="file" accept="image/*" onChange={this.onFileChange} />
                     </div>
