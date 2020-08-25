@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
+import  { Redirect } from 'react-router-dom'
 import axios from 'axios';
+import Cookies from 'universal-cookie';
+
+import Sidebar from './Sidebar';
+import Navbar from './Navbar';
+
+const cookies = new Cookies();
 
 class Form extends Component {
 
@@ -8,8 +15,19 @@ class Form extends Component {
 
         this.state ={
             success_flag: 0,
-            selectedFile: null
+            selectedFile: null,
+            login: false
         };
+    }
+
+    authLogin(){
+        let jwtToken = cookies.get('jwtToken');
+        
+        if (jwtToken !== undefined){
+            this.setState({
+                login: true
+            });
+        }
     }
 
     onFileChange = event => { 
@@ -52,6 +70,10 @@ class Form extends Component {
     }
 
   render() {
+    if (this.state.login === false) {
+        return <Redirect to='/login' />
+    }
+
     if (this.state.success_flag === 1){
          var success_flag = <div className="form-group">
             <br></br>
@@ -73,34 +95,40 @@ class Form extends Component {
     }
 
     return (
-        <div className="col-lg-12">
-            {success_flag}
-            <form id="create-course-form" action="#" className="form-horizontal" style={{paddingTop: 25}}>
-                <div className="form-group">
-                    <label htmlFor="control-demo-1" className="col-sm-3">Name</label>
-                    <div className="col-sm-12">
-                        <input type="text" id="control-demo-1" className="form-control" placeholder="Name" ref="name" />
-                    </div>
+        <section id="admin">
+            <Sidebar />
+            <div class="content">
+                <Navbar />
+                <div className="col-lg-12">
+                    {success_flag}
+                    <form id="create-course-form" action="#" className="form-horizontal" style={{paddingTop: 25}}>
+                        <div className="form-group">
+                            <label htmlFor="control-demo-1" className="col-sm-3">Name</label>
+                            <div className="col-sm-12">
+                                <input type="text" id="control-demo-1" className="form-control" placeholder="Name" ref="name" />
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="control-demo-2" className="col-sm-3">Price</label>
+                            <div className="col-sm-12">
+                                <input type="number" id="control-demo-2" className="form-control" placeholder="Price" ref="price" />
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="control-demo-2" className="col-sm-3">Image</label>
+                            <div className="col-sm-12">
+                                <input type="file" accept="image/*" onChange={this.onFileChange} />
+                            </div>
+                        </div>
+                        <div className="form-group">
+                            <div className="col-sm-12">
+                                <input type="button" onClick={() => this.post(this.refs)} value="Submit" className="btn btn-primary" />
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div className="form-group">
-                    <label htmlFor="control-demo-2" className="col-sm-3">Price</label>
-                    <div className="col-sm-12">
-                        <input type="number" id="control-demo-2" className="form-control" placeholder="Price" ref="price" />
-                    </div>
-                </div>
-                <div className="form-group">
-                    <label htmlFor="control-demo-2" className="col-sm-3">Image</label>
-                    <div className="col-sm-12">
-                        <input type="file" accept="image/*" onChange={this.onFileChange} />
-                    </div>
-                </div>
-                <div className="form-group">
-                    <div className="col-sm-12">
-                        <input type="button" onClick={() => this.post(this.refs)} value="Submit" className="btn btn-primary" />
-                    </div>
-                </div>
-            </form>
-        </div>
+            </div>
+        </section>
       );
   }
 }

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import  { Redirect } from 'react-router-dom'
 import axios from 'axios';
 import Cookies from 'universal-cookie';
+
+import Sidebar from './Sidebar';
+import Navbar from './Navbar';
+
 const cookies = new Cookies();
 
 class Cart extends Component {
@@ -9,8 +14,19 @@ class Cart extends Component {
         super();
 
         this.state ={
-            data: []
+            data: [],
+            login: false
         };
+    }
+
+    authLogin(){
+        let jwtToken = cookies.get('jwtToken');
+        
+        if (jwtToken !== undefined){
+            this.setState({
+                login: true
+            });
+        }
     }
     
     componentWillMount(){
@@ -36,7 +52,7 @@ class Cart extends Component {
         let cookieCartList = cookies.get('cart_list');
         
         for (var i=0; i<cookieCartList.length; i++){
-            if (cookieCartList[i] == id) cookieCartList.splice(i, 1);
+            if (cookieCartList[i] === id) cookieCartList.splice(i, 1);
         }
 
         cookies.set('cart_list', cookieCartList, { path: '/' });
@@ -45,6 +61,9 @@ class Cart extends Component {
     }
 
   render() {
+    if (this.state.login === false) {
+        return <Redirect to='/login' />
+    }
 
     const list_data = this.state.data.map((item, index)=> {
         return <tr>
@@ -57,24 +76,30 @@ class Cart extends Component {
     })
 
     return (
-        <div className="col-md-12">
-            <div className="widget p-lg">
-            <h4 className="m-b-lg">List</h4>
-                <table className="table">
-                    <tbody>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Image</th>
-                            <th></th>
-                        </tr>
-                        {list_data}
-                    </tbody>
-                </table>
+        <section id="admin">
+            <Sidebar />
+            <div class="content">
+                <Navbar />
+                <div className="col-md-12">
+                    <div className="widget p-lg">
+                    <h4 className="m-b-lg">List</h4>
+                        <table className="table">
+                            <tbody>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Image</th>
+                                    <th></th>
+                                </tr>
+                                {list_data}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
-      );
+        </section>
+    );
   }
 }
 
