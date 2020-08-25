@@ -7,6 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 
 import './css/bootstrap.min.css';
+import './css/style-liberty.css';
 import './css/app.css';
 
 
