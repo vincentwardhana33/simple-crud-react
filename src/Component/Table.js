@@ -16,21 +16,23 @@ class Table extends Component {
         this.state ={
             data: [],
             success_flag: 0,
-            login: false
+            login: true
         };
     }
 
     authLogin(){
         let jwtToken = cookies.get('jwtToken');
         
-        if (jwtToken !== undefined){
+        if (jwtToken === undefined){
             this.setState({
-                login: true
+                login: false
             });
         }
     }
     
     componentWillMount(){
+        this.authLogin();
+
         axios.get('http://localhost:3001/select')
         .then((response) =>{
             this.setState({

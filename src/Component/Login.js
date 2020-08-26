@@ -1,22 +1,53 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import Cookies from 'universal-cookie';
 
 const cookies = new Cookies();
 
 class Login extends Component {
-    post(refs){
-        axios.post('http://localhost:3001/login', {
-            username: refs.username.value,
-            password: refs.password.value
-        }).then(function(response){
-            console.log(response.data);
-        }).catch(function(err){
-            console.log(err);
-        });
+  constructor(){
+    super();
+
+    this.state ={
+        login: false
+    };
+  }
+
+  componentWillMount(){
+    let jwtToken = cookies.get('jwtToken');
+
+    if (jwtToken !== undefined){
+      this.setState({
+        login: true
+      })
     }
+  }
+
+  post(refs){
+    var self = this;
+    axios.post('http://localhost:3001/login', {
+        username: refs.username.value,
+        password: refs.password.value
+    }).then(function(response){
+      console.log(response);
+      if (response.data.success && response.data.token != undefined){
+        cookies.set('jwtToken', response.data.token, { path: '/' });
+
+        self.setState({
+          login: true
+        })
+      }
+    }).catch(function(err){
+        console.log(err);
+    });
+  }
 
   render() {
+    if (this.state.login === true) {
+      return <Redirect to='/' />
+    }
+
     return (
         <section>
         <div className>

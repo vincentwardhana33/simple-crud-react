@@ -16,18 +16,22 @@ class Form extends Component {
         this.state ={
             success_flag: 0,
             selectedFile: null,
-            login: false
+            login: true
         };
     }
 
     authLogin(){
         let jwtToken = cookies.get('jwtToken');
         
-        if (jwtToken !== undefined){
+        if (jwtToken === undefined){
             this.setState({
-                login: true
+                login: false
             });
         }
+    }
+
+    componentWillMount(){
+        this.authLogin();
     }
 
     onFileChange = event => { 

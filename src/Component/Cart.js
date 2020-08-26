@@ -15,21 +15,22 @@ class Cart extends Component {
 
         this.state ={
             data: [],
-            login: false
+            login: true
         };
     }
 
     authLogin(){
         let jwtToken = cookies.get('jwtToken');
         
-        if (jwtToken !== undefined){
+        if (jwtToken === undefined){
             this.setState({
-                login: true
+                login: false
             });
         }
     }
     
     componentWillMount(){
+        this.authLogin();
         this.getCart();
     };
 
