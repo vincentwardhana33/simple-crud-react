@@ -1,6 +1,6 @@
 # Simple CRUD React
 
-This repository is a simple example for creating CRUD using ReactJS
+This repository is a simple example for creating CRUD using ReactJS, Login and Add to Cart using client-side cookie.
 
 Back-End NodeJS Express Repository: [here](https://github.com/vincentwardhana33/simple-crud-nodejs.git)
 
