@@ -30,3 +30,8 @@ $ npm install
 ```
 $ npm start
 ```
+
+## Sample Account
+Login with sample account:
+1. username: ```vincent```, password: ```abc123```.
+2. username: ```wardhana```, password: ```abc123```.
